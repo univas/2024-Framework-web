@@ -1,0 +1,9 @@
+npm -v
+cd "pasta de trabalho"
+npm create vite@latest my-vue-app -- --template vue
+
+cd nomedoprojeto
+
+npm install
+
+npm run dev
