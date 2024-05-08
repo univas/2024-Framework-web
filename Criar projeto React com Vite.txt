@@ -9,3 +9,6 @@ cd nomedoprojeto
 npm install
 
 npm run dev
+
+// Troque bootstrap pelo nome da biblioteca que deseja instalar
+npm install bootstrap
