@@ -1,0 +1,8 @@
+// Para instalar a biblioteca utilize
+npm install -g json-server
+
+
+// Para rodar a api crie um arquivo db.json com um objeto contendo as entidades da aplicação e execute:
+json-server db.json
+
+// Utilize o thunder-client do vs code para usar.
