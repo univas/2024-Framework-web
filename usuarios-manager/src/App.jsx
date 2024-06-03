@@ -13,7 +13,9 @@ function App() {
   const [nome, setNome] = useState("")
 
   useEffect(() => {
-    if(isLoading){
+    if(nome != "" && nome.length > 3 && !isLoading){
+      setUsuarios(usuarios.filter(usuario => usuario.nome.toLowerCase().includes(nome.toLowerCase())))
+    }else if(isLoading || nome.length == 0){
       axios.get(`http://localhost:3000/usuarios`)
         .then(res => {
           setUsuarios(res.data)
