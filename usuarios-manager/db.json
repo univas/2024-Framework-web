@@ -8,7 +8,7 @@
       "telefone": "(35) 99867-2990",
       "cargo": "Professor Colaborador",
       "tipo": "professor",
-      "ativo": 1
+      "ativo": 0
     },
     {
       "id": "7ec1",
@@ -18,7 +18,7 @@
       "telefone": "(35) 99999-8999",
       "cargo": "",
       "tipo": "aluno",
-      "ativo": 1
+      "ativo": 0
     }
   ],
   "repositorios": [],
