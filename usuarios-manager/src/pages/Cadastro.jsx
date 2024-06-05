@@ -10,9 +10,8 @@ function Cadastro(){
     // Um componente não controlado é aquele que não é definido o value desde o início
     // Por isso colocamos as propriedades do estado desde o início no useState
 
-    function handleNome(event){
+        function handleNome(event){
         const {value} = event.target
-
         let nomeInvalido = false
 
         if(value.length < 3){
@@ -26,11 +25,11 @@ function Cadastro(){
         if(nomeInvalido){
             setErros({
                 ...erros,
-                nome: "Digite o nome completo."
+                nome: "Digite o nome completo do usuário"
             })
         }else{
             setErros({
-                ...delete erros.nome
+                ... delete erros.nome
             })
         }
 
@@ -38,15 +37,81 @@ function Cadastro(){
             ...usuario,
             nome: value
         })
+    }
 
+    function handleLogin(event){
+        const {value} = event.target
+        
+        setUsuario({
+            ...usuario,
+            login: value
+        })
+    }
+
+    function handleEmail(event){
+        const {value} = event.target
+        let nomeInvalido = false
+
+        if(value.length < 3){
+            nomeInvalido = true
+        }
+
+        if(!value.includes("@")){
+            nomeInvalido = true
+        }
+
+        if(nomeInvalido){
+            setErros({
+                ...erros,
+                email: "Digite o e-mail completo do usuário"
+            })
+        }else{
+            setErros({
+                ... delete erros.email
+            })
+        }
+
+        setUsuario({
+            ...usuario,
+            email: value
+        })
     }
 
     function handleTipo(event){
         const {value} = event.target
-
+        
         setUsuario({
             ...usuario,
             tipo: value
+        })
+    }
+
+    function handleTelefone(event){
+        const {value} = event.target
+
+        let telefoneInvalido = false
+
+        if(value.length > 15 || value.length < 14){
+            telefoneInvalido = true
+        }
+
+        if(!value.includes("(") || !value.includes(")") || !value.includes("-") || !value.includes(" ")){
+            telefoneInvalido = true
+        }
+
+        if(telefoneInvalido){
+            setErros({
+                ...erros,
+                telefone: "Insira o telefone no padrão (99) 99999-9999"
+            })
+        }else{
+            setErros({
+                ... delete erros.telefone
+            })
+        }
+
+        setUsuario({
+            ...usuario, telefone: value
         })
     }
 
@@ -55,7 +120,6 @@ function Cadastro(){
 
         console.log(usuario)
     }
-
     return (
         <div>
             <div className="row">
@@ -69,9 +133,25 @@ function Cadastro(){
                         <div className="row my-3">
                             <div className="col">
                                 <label htmlFor="_nome">Nome</label>
-                                <input type={"text"} className="form-control" id="_nome" value={usuario.nome} onChange={handleNome} />
+                                <input type="text" id="_nome" value={usuario.nome} className="form-control" onChange={handleNome} />
                                 {
-                                    erros.nome && <span className="text-danger">{ erros.nome }</span>
+                                    erros.nome && <span className="text-danger">{erros.nome}</span>
+                                }
+                            </div>
+
+                            <div className="col">
+                                <label htmlFor="_login">Login</label>
+                                <input type="text" id="_login" value={usuario.login} className="form-control" onChange={handleLogin} />
+                                {
+                                    erros.login && <span className="text-danger">{erros.login}</span>
+                                }
+                            </div>
+
+                            <div className="col">
+                                <label htmlFor="_email">E-mail</label>
+                                <input type="text" id="_email" value={usuario.email} className="form-control" onChange={handleEmail} />
+                                {
+                                    erros.email && <span className="text-danger">{erros.email}</span>
                                 }
                             </div>
                         </div>
@@ -85,6 +165,13 @@ function Cadastro(){
                                     <option value="Funcionário">Funcionário</option>
                                     <option value="Professor">Professor</option>
                                 </select>
+                            </div>
+                            <div className="col">
+                                <label htmlFor="_telefone">Telefone</label>
+                                <input type="text" id="_telefone" value={usuario.telefone} className="form-control" onChange={handleTelefone} />
+                                {
+                                    erros.telefone && <span className="text-danger">{erros.telefone}</span>
+                                }
                             </div>
                         </div>
                         <div className="row">
