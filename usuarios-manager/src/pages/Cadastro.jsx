@@ -1,6 +1,10 @@
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom'
+
+import axios from 'axios'
 
 function Cadastro(){
+    const navigate = useNavigate()
     const [erros, setErros] = useState({})
     const [usuario, setUsuario] = useState({
         nome: "",
@@ -10,7 +14,7 @@ function Cadastro(){
     // Um componente não controlado é aquele que não é definido o value desde o início
     // Por isso colocamos as propriedades do estado desde o início no useState
 
-        function handleNome(event){
+    function handleNome(event){
         const {value} = event.target
         let nomeInvalido = false
 
@@ -117,8 +121,26 @@ function Cadastro(){
 
     function submitForm(event){
         event.preventDefault()
+        usuario.ativo = 1
+        usuario.cargo = usuario.tipo
 
         console.log(usuario)
+        // Criar validações aqui
+        // Nome => Mais de 03 caracteres e completo
+        // Login => Não pode estar vazio
+        // Email => Precisa ter @
+        // Tipo => Não pode ser vazio
+        // Telefone => Precisa estar no formato (99) 99999-9999
+
+        // Executar a requisição apenas se estiver válido
+        axios.post('http://localhost:3000/usuarios', usuario)
+            .then(res => {
+                alert("Salvo com sucesso!")
+                navigate("/")
+            }).catch(res => {
+                alert("Erro ao salvar usuário")
+                // Colocar erro no estado e mostrar em tela
+            })
     }
     return (
         <div>
